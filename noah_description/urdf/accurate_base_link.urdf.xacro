@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="accurate_base_link">
+
+	<!-- All visuals meshes origins are eye-balled to match the collisions
+		 This is due to a mismatch in positions when generating the meshes for all the parts. -->
+
+	<xacro:macro name="accurate_base_link">
+
+		<xacro:property name="M_PI" value="3.14159"/>
+
+		<!-- BASE************************************************************************** -->
+
+		<xacro:property name="base_generic_depth" value="0.19"/>
+		<xacro:property name="base_generic_width" value="0.135"/>
+		<xacro:property name="base_generic_heigth" value="0.003"/>
+
+		<link name="base_generic_link">			<!-- Botom base generic -->
+
+			<inertial>
+				<mass value="0.01117" />
+				<inertia ixx="0.0000336115" ixy="0" ixz="0" iyy="0.0000505675" iyz="0" izz="0.0000169728" />
+			</inertial>
+
+			<visual>
+				<origin xyz="-0.095 -0.0675 -0.0015" rpy="${M_PI/2} 0 ${M_PI/2}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/noah_base_generic_printed.dae" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${base_generic_depth} ${base_generic_width} ${base_generic_heigth}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<gazebo reference="base_generic_link">
+			<material>Gazebo/SkyBlue</material>
+		</gazebo>
+
+		<!-- FRONT************************************************************************** -->
+
+		<xacro:property name="front_depth" value="0.06"/>
+		<xacro:property name="front_width" value="0.155"/>
+		<xacro:property name="front_heigth" value="0.05"/>
+
+		<link name="front_link">
+
+			<inertial>
+				<mass value="0.19" />
+				<inertia ixx="0.0000965833" ixy="0" ixz="0" iyy="0.000437396" iyz="0" izz="0.000419979" />
+			</inertial>
+
+			<visual>
+				<origin xyz="-0.03 -0.0775 -0.025" rpy="${M_PI/2} 0 ${M_PI/2}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/front_noah_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${front_depth} ${front_width} ${front_heigth}" />
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="base_front_joint" type="fixed">
+			<parent link="base_generic_link" />
+			<child link="front_link" />
+			<origin xyz="${base_generic_depth/2 - front_depth/2} 0 ${front_heigth/2 + base_generic_heigth/2}" rpy="0 0 0" />
+		</joint>
+
+		<gazebo reference="front_link">
+			<material>Gazebo/SkyBlue</material>
+		</gazebo>
+
+		<!-- CASTER HOLDER************************************************************************** -->
+
+		<xacro:property name="caster_holder_radius" value="0.02299"/>
+		<xacro:property name="caster_holder_length" value="0.033316"/>
+
+		<link name="caster_holder_link">
+			<inertial>
+				<mass value="0.01391" />
+				<inertia ixx="0.0000031246" ixy="0" ixz="0" iyy="0.0000031246" iyz="0" izz="0.0003676" />
+			</inertial>
+
+			<visual>
+				<origin xyz="0.022964 -0.03048 0.016316" rpy="-${M_PI/2} 0 ${M_PI/2}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/C000_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+
+			<visual>
+				<origin xyz="0.022964 -0.030488 0.016316" rpy="-${M_PI/2} 0 ${M_PI/2}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/C001_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<cylinder radius="${caster_holder_radius}" length="${caster_holder_length}"/>
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="caster_holder_joint" type="fixed">
+			<parent link="base_generic_link" />
+			<child link="caster_holder_link" />
+			<origin xyz="-0.091 0 0" rpy="0 0 0" />
+			<!-- Origin in x adjusted by hand -->
+		</joint>
+
+		<gazebo reference="caster_holder_link">
+			<material>Gazebo/SkyBlue</material>
+		</gazebo>
+
+		<!-- BASE SUPPORTS************************************************************************** -->
+		<!-- Joints x and y coords are adjusted by hand -->
+
+		<xacro:property name="base_support_depth" value="0.04306"/>
+		<xacro:property name="base_support_width" value="0.011069"/>
+		<xacro:property name="base_support_heigth" value="0.05"/>
+
+		<link name="left_base_support_link">
+			<inertial>
+				<mass value="0.0104" />
+				<origin xyz="0 0 0" rpy="0 0 -${M_PI/4}" />
+				<inertia ixx="0.0000037736" ixy="0" ixz="0" iyy="0.000001713" iyz="0" izz="0.0000022728" />
+			</inertial>
+
+			<visual>
+				<origin xyz="-0.016 0.093 0.025" rpy="-${M_PI/2} 0 -${M_PI/4}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/back_left_generic_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 -${M_PI/4}" />
+				<geometry>
+					<box size="${base_support_depth} ${base_support_width} ${base_support_heigth}" />
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="base_left_support_joint" type="fixed">
+			<parent link="base_generic_link" />
+			<child link="left_base_support_link" />
+			<origin xyz="-0.07847 -0.04997 ${base_generic_heigth/2 + base_support_heigth/2}" rpy="0 0 0" />
+		</joint>
+
+		<link name="right_base_support_link">
+			<inertial>
+				<mass value="0.0104" />
+				<origin xyz="0 0 0" rpy="0 0 ${M_PI/4}" />
+				<inertia ixx="0.0000037736" ixy="0" ixz="0" iyy="0.000001713" iyz="0" izz="0.0000022728" />
+			</inertial>
+
+			<visual>
+				<origin xyz="-0.008 -0.085 0.025" rpy="-${M_PI/2} 0 -2.35619" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/back_right_generic_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 ${M_PI/4}" />
+				<geometry>
+					<box size="${base_support_depth} ${base_support_width} ${base_support_heigth}" />
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="base_right_support_joint" type="fixed">
+			<parent link="base_generic_link" />
+			<child link="right_base_support_link" />
+			<origin xyz="-0.07847 0.04997 ${base_generic_heigth/2 + base_support_heigth/2}" rpy="0 0 0" />
+		</joint>
+
+		<gazebo reference="left_base_support_link">
+			<material>Gazebo/DarkGrey</material>
+		</gazebo>
+
+		<gazebo reference="right_base_support_link">
+			<material>Gazebo/DarkGrey</material>
+		</gazebo>
+
+		<!-- TOP************************************************************************** -->
+
+		<xacro:property name="top_generic_depth" value="0.19"/>
+		<xacro:property name="top_generic_width" value="0.135"/>
+		<xacro:property name="top_generic_heigth" value="0.003"/>
+
+		<link name="top_generic_link">
+
+			<inertial>
+				<mass value="0.01117" />
+				<inertia ixx="0.0000336115" ixy="0" ixz="0" iyy="0.0000505675" iyz="0" izz="0.0000169728" />
+			</inertial>
+
+			<visual>
+				<origin xyz="-0.095 -0.0675 -0.0015" rpy="${M_PI/2} 0 ${M_PI/2}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/top_generic.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${top_generic_depth} ${top_generic_width} ${top_generic_heigth}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<joint name="base_top_joint" type="fixed">
+			<parent link="base_generic_link" />
+			<child link="top_generic_link" />
+			<origin xyz="0 0 ${base_support_heigth + top_generic_heigth/2 + base_generic_heigth/2}" rpy="0 0 0" />
+		</joint>
+
+		<gazebo reference="top_generic_link">
+			<material>Gazebo/SkyBlue</material>
+		</gazebo>
+
+		<!-- WHEEL ADAPTERS************************************************************************** -->
+
+		<xacro:property name="wheel_adapter_radius" value="0.01085"/>
+		<xacro:property name="wheel_adapter_length" value="0.02926"/>
+
+		<link name="left_wheel_adapter_link">
+
+			<inertial>
+				<mass value="0.015" />
+				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+				<inertia ixx="0.000001512" ixy="0" ixz="0" iyy="0.000001512" iyz="0" izz="0.00000088291" />
+			</inertial>
+
+			<visual>
+				<origin xyz="-0.011 0.015 -0.013" rpy="${M_PI/2} 0 0" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/adapter1_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+				<geometry>
+					<cylinder length="${wheel_adapter_length}" radius="${wheel_adapter_radius}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<joint name="front_left_wheel_adapter_joint" type="fixed">
+			<parent link="front_link" />
+			<child link="left_wheel_adapter_link" />
+			<origin xyz="-${wheel_adapter_radius} ${front_width/2 + wheel_adapter_length/2} 0" rpy="0 0 0" />
+		</joint>
+
+		<link name="right_wheel_adapter_link">
+
+			<inertial>
+				<mass value="0.015" />
+				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+				<inertia ixx="0.000001512" ixy="0" ixz="0" iyy="0.000001512" iyz="0" izz="0.00000088291" />
+			</inertial>
+
+			<visual>
+				<origin xyz="0.011 -0.015 -0.013" rpy="${M_PI/2} 0 ${M_PI}" />
+				<geometry>
+					<mesh filename="package://noah_description/meshes/adapter1_printed.STL" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+				<geometry>
+					<cylinder length="${wheel_adapter_length}" radius="${wheel_adapter_radius}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<joint name="front_right_wheel_adapter_joint" type="fixed">
+			<parent link="front_link" />
+			<child link="right_wheel_adapter_link" />
+			<origin xyz="-${wheel_adapter_radius} -${front_width/2 + wheel_adapter_length/2} 0" rpy="0 0 0" />
+		</joint>
+
+		<gazebo reference="left_wheel_adapter_link">
+			<material>Gazebo/DarkGrey</material>
+		</gazebo>
+
+		<gazebo reference="right_wheel_adapter_link">
+			<material>Gazebo/DarkGrey</material>
+		</gazebo>
+
+		<!-- BATTERIES************************************************************************** -->
+
+		<xacro:property name="battery_depth" value="0.05"/>
+		<xacro:property name="battery_width" value="0.07"/>
+		<xacro:property name="battery_heigth" value="0.02"/>
+
+		<link name="battery_link">
+
+			<inertial>
+				<mass value="0.22" />
+				<inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+			</inertial>
+
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${battery_depth} ${battery_width} ${battery_heigth}" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${battery_depth} ${battery_width} ${battery_heigth}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<joint name="top_battery_joint" type="fixed">
+			<parent link="top_generic_link" />
+			<child link="battery_link" />
+			<origin xyz="-${top_generic_depth/3} 0 ${battery_heigth/2 + top_generic_heigth/2}" rpy="0 0 0" />
+		</joint>
+
+		<gazebo reference="battery_link">
+			<material>Gazebo/Green</material>
+		</gazebo>
+
+		<!-- ELECTRONICS************************************************************************** -->
+
+		<xacro:property name="electronics_depth" value="0.08"/>
+		<xacro:property name="electronics_width" value="0.12"/>
+		<xacro:property name="electronics_heigth" value="0.015"/>
+
+		<link name="electronics_link">
+
+			<inertial>
+				<mass value="0.22" />
+				<inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+			</inertial>
+
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${electronics_depth} ${electronics_width} ${electronics_heigth}" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="${electronics_depth} ${electronics_width} ${electronics_heigth}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<joint name="base_electronics_joint" type="fixed">
+			<parent link="base_generic_link" />
+			<child link="electronics_link" />
+			<origin xyz="-${electronics_depth/3.5} 0 ${base_generic_heigth/2 + electronics_heigth/2}" rpy="0 0 0" />
+		</joint>
+
+		<gazebo reference="electronics_link">
+			<material>Gazebo/Blue</material>
+		</gazebo>
+
+
+	</xacro:macro>
+</robot>

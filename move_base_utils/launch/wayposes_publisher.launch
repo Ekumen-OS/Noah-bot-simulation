@@ -1,0 +1,12 @@
+<launch>
+
+  <arg name="use_sim_time" default="true"/>
+  <arg name="mb_goals_file" default="mb_goals"/>
+
+  <param name="use_sim_time" value="$(arg use_sim_time)"/>
+
+  <rosparam file="$(find move_base_utils)/mb_goals/$(arg mb_goals_file).yaml" command="load" />
+
+  <node pkg="move_base_utils" type="wayposes_publisher.py" name="wayposes_publisher" output="screen" />
+
+</launch>

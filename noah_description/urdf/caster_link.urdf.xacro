@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
+
+	<xacro:macro name="caster" params="caster_radius parent_link *joint_pose">
+
+		<!-- caster description, simple sphere with no friction (ping pong ball) -->
+		<link name="caster_link">
+
+			<inertial>
+				<mass value="0.003" />
+				<inertia ixx="0.000000968" ixy="0" ixz="0" iyy="0.000000968" iyz="0" izz="0.000000968" />
+			</inertial>
+
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<sphere radius="${caster_radius}" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<sphere radius="${caster_radius}" />
+				</geometry>
+			</collision>
+
+		</link>
+
+		<!-- caster joint, where the caster is attached -->
+		<joint name="caster_joint" type="fixed">
+			<parent link="${parent_link}" />
+			<child link="caster_link" />
+			<xacro:insert_block name="joint_pose"/>
+		</joint>
+
+		<!-- caster gazebo properties -->
+		<gazebo reference="caster_link">
+			<mu1 value="0.0"/>
+			<mu2 value="0.0"/>
+			<material>Gazebo/DarkGrey</material>
+		</gazebo>
+
+	</xacro:macro>
+
+</robot>

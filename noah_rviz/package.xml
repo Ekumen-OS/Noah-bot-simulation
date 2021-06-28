@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>noah_rviz</name>
+  <version>0.1.0</version>
+  <description>
+    Rviz visualization for noah robot.
+  </description>
+
+  <author email="juancarosella96@ekumenlabs.com">JuanCarosella</author>
+  <maintainer email="juancarosella96@ekumenlabs.com">JuanCarosella</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+
+  <exec_depend>noah_description</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz</exec_depend>
+
+</package>

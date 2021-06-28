@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ABSDIR=$(dirname $(readlink -f $0))
+
+# User must replace this path
+WS_PATH="<PATH_TO_PROJECT>"
+
+xhost +local:root
+docker run -it -e DISPLAY -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+	-v "$WS_PATH:/home/dev/catkin_ws/src" \
+	-e "TERM=xterm-256color" \
+	--gpus all \
+    --name noah_docker_process \
+	--privileged --rm docker_noahbot /bin/bash

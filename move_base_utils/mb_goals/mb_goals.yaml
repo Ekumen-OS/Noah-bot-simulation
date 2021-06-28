@@ -1,0 +1,55 @@
+goal_poses:
+  - position:
+      x: 14.610
+      y: 5.833
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: -0.559
+      w: 0.829
+  - position:
+      x: 13.79
+      y: 2.892
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: -0.978
+      w: 0.21
+  - position:
+      x: 10.004
+      y: 2.226
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.994
+      w: 0.108
+  - position:
+      x: 8.239
+      y: 2.856
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.731
+      w: 0.683
+  - position:
+      x: 8.462
+      y: 6.451
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.246
+      w: 0.969
+  - position:
+      x: 11.739
+      y: 6.619
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: -0.044
+      w: 0.999

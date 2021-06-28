@@ -1,0 +1,11 @@
+<launch>
+
+    <arg name="repeating" default="True" />
+    <arg name="abortion_behaviour" default="stop" />
+
+    <node name="move_base_sequence" pkg="move_base_sequence" type="server.py" output="screen">
+        <param name="/move_base_sequence/is_repeating" value="$(arg repeating)"/>
+        <param name="/move_base_sequence/abortion_behaviour" value="$(arg abortion_behaviour)"/>
+    </node>
+
+</launch>

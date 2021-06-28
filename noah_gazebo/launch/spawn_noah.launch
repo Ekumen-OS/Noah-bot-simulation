@@ -1,0 +1,12 @@
+<launch>
+
+	<arg name="robot_model" default="accurate_noah"/>
+
+	<include file="$(find noah_description)/launch/description.launch">
+		<arg name="robot_model" value="$(arg robot_model)"/>
+	</include>
+
+	<!-- Spawn a robot into Gazebo-->
+	<node name="spawn_noah" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model $(arg robot_model)" /> 
+
+</launch>

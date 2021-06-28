@@ -1,0 +1,3 @@
+The meshes for the robot model were taken from https://github.com/GonzaCerv/noah-hardware
+
+License: https://github.com/GonzaCerv/noah-hardware/blob/master/LICENSE
