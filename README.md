@@ -73,7 +73,7 @@ source devel/setup.bash
 ```
 7. For the small_house_world to work, copy the models from noah_gazebo to the gazebo models folder
 ```
-cp -r /src/<REPOSITORY>/noah_gazebo/models/ ~/.gazebo/
+cp -r src/<REPOSITORY>/noah_gazebo/models/ ~/.gazebo/
 ``` 
 8. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
 
