@@ -25,28 +25,27 @@ cd <PROJECT>/docker
 ```
 docker build -t docker_noahbot .
 ```
-5. Change the WS_PATH in the run_docker file to be the full path to the repo (e.g. "/home/USER/PROJECT") 
-6. Run the script to run the docker image and mount the project. **IMPORTANT:** If the user does not own an nvidia gpu, delete the "`--gpus all \`" line
+5. Run the script to run the docker image and mount the project. **IMPORTANT:** If the user does not own an nvidia gpu, delete the "`--gpus all \`" line
 ```
 ./run_docker
 ```
-7. Download dependencies for the packages
+6. Download dependencies for the packages
 ```
 cd /home/dev/catkin_ws
 rosdep install --from-paths src --ignore-src -r -y
 ```
-8. Build the project and source the workspace
+7. Build the project and source the workspace
 ```
 cd /home/dev/catkin_ws
 catkin_make
 source devel/setup.bash
 ```
-9. For the small_house_world to work, copy the models from noah_gazebo to the gazebo models folder
+8. For the small_house_world to work, copy the models from noah_gazebo to the gazebo models folder
 ```
 cp -r /home/dev/catkin_ws/src/noah_gazebo/models/ ~/.gazebo/
 ``` 
-10. Launch one of the top level launchfiles!
-11. If the user wants to open more terminals inside the docker process, in a new terminal run:
+9. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
+10. If the user wants to open more terminals inside the docker process, in a new terminal run:
 ```
 docker exec noah_docker_process -it bash
 source /opt/ros/noetic/setup.bash
@@ -76,7 +75,7 @@ source devel/setup.bash
 ```
 cp -r /src/<REPOSITORY>/noah_gazebo/models/ ~/.gazebo/
 ``` 
-8. Launch one of the top level launchfiles!
+8. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
 
 
 ## Top level launch files
