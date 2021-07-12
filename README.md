@@ -2,6 +2,8 @@
 
 This repository contains a simulation for the Noah-bot robot. It contains an URDF model of the robot with visual meshes included, a Kinect camera, a laser sensor and a differential drive gazebo-ros plugin.
 
+![image](https://user-images.githubusercontent.com/77001289/125287999-03e26b80-e2f4-11eb-9619-a15130b4b15f.png)
+
 Packages where built to show how to use the robot to perform SLAM and navigate through an unknown or known map. Documentation on each individual package can be found in each one of them.
 
 Developed in:
