@@ -33,25 +33,25 @@ docker build -t docker_noahbot .
 ```
 6. Download dependencies for the packages
 ```
-cd /home/dev/catkin_ws
+cd /home/catkin_ws
 rosdep install --from-paths src --ignore-src -r -y
 ```
 7. Build the project and source the workspace
 ```
-cd /home/dev/catkin_ws
+cd /home/catkin_ws
 catkin_make
 source devel/setup.bash
 ```
 8. For the small_house_world to work, copy the models from noah_gazebo to the gazebo models folder
 ```
-cp -r /home/dev/catkin_ws/src/noah_gazebo/models/ ~/.gazebo/
+cp -r /home/catkin_ws/src/noah_gazebo/models/ ~/.gazebo/
 ``` 
 9. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
 10. If the user wants to open more terminals inside the docker process, in a new terminal run:
 ```
 docker exec noah_docker_process -it bash
 source /opt/ros/noetic/setup.bash
-source /home/dev/catkin_ws/devel/setup.bash
+source /home/catkin_ws/devel/setup.bash
 ```
 
 
