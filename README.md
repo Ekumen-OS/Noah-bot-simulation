@@ -34,6 +34,7 @@ docker build -t docker_noahbot .
 6. Download dependencies for the packages
 ```
 cd /home/catkin_ws
+sudo apt-get update
 rosdep install --from-paths src --ignore-src -r -y
 ```
 7. Build the project and source the workspace
