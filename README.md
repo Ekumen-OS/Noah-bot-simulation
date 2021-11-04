@@ -50,7 +50,7 @@ cp -r /home/catkin_ws/src/noah_gazebo/models/ ~/.gazebo/
 9. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
 10. If the user wants to open more terminals inside the docker process, in a new terminal run:
 ```
-docker exec noah_docker_process -it bash
+docker exec -it noah_docker_process bash
 source /opt/ros/noetic/setup.bash
 source /home/catkin_ws/devel/setup.bash
 ```
