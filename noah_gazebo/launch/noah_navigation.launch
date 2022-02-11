@@ -27,8 +27,8 @@
 
     <!-- Navigation stack -->
     <include file="$(find noah_2dnav)/launch/2dnav.launch" >
-        <param name="map_name" value="$(arg map_name)"/>
-        <param name="global_costmap" value="$(arg global_costmap)" />
+        <arg name="map_name" value="$(arg map_name)"/>
+        <arg name="global_costmap" value="$(arg global_costmap)" />
     </include>
 
     <!-- Move base sequence -->

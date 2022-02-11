@@ -46,7 +46,7 @@
 
    <!-- Move base-->
    <include file="$(find move_base_utils)/launch/move_base.launch" >
-        <param name="global_costmap" value="$(arg global_costmap)" />
+        <arg name="global_costmap" value="$(arg global_costmap)" />
    </include>
 
 </launch>
