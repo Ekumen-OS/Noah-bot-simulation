@@ -23,6 +23,8 @@
   <depend>noah_rtabmap</depend>
   <depend>noah_rviz</depend>
   <depend>move_base_utils</depend>
+  <depend>robot_state_publisher</depend>
   <depend>rostopic</depend>
+  <depend>rviz</depend>
 
 </package>
