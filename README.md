@@ -43,12 +43,8 @@ cd /home/catkin_ws
 catkin_make
 source devel/setup.bash
 ```
-8. For the small_house_world to work, copy the models from noah_gazebo to the gazebo models folder
-```
-cp -r /home/catkin_ws/src/noah_gazebo/models/ ~/.gazebo/
-``` 
-9. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
-10. If the user wants to open more terminals inside the docker process, in a new terminal run:
+8. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
+9. If the user wants to open more terminals inside the docker process, in a new terminal run:
 ```
 docker exec -it noah_docker_process bash
 source /opt/ros/noetic/setup.bash
@@ -74,11 +70,7 @@ rosdep install --from-paths src --ignore-src -r -y
 catkin_make
 source devel/setup.bash
 ```
-7. For the small_house_world to work, copy the models from noah_gazebo to the gazebo models folder
-```
-cp -r src/<REPOSITORY>/noah_gazebo/models/ ~/.gazebo/
-``` 
-8. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
+7. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
 
 
 ## Top level launch files
@@ -106,7 +98,7 @@ cp -r src/<REPOSITORY>/noah_gazebo/models/ ~/.gazebo/
 
 ## Testing worlds
 - willowgarage -> Comes included with Gazebo. No map generated.
-- small_house -> Taken from AWS open repository. For it to work correctly, the user needs to include the models located in noah_gazebo into the gazebo models (usually located in ~/.gazebo/models/). A SLAM generated map is provided for this map.
+- small_house -> Taken from AWS open repository. A SLAM generated map is provided for this map.
 
 ## SLAM generated map
 A map was generated for the "small_house" world using the SLAM Rtabmap package. This package creates a database from which the rtabmap.pgm and rtabmap.yaml files were taken. This files are used for the localization and move_base packages. The package stores the database in "~/.ros/rtabmap.db" (default location) from which the .pgm and .yaml can be extracted using the "database2pgm.sh" script located in "noah_rtabmap" package.
