@@ -25,7 +25,7 @@ cd <PROJECT>/docker
 ```
 4. Build the docker image:
 ```
-docker build -t docker_noahbot .
+./build
 ```
 5. Run the script to run the docker image and mount the project. **IMPORTANT:** If the user does not own an nvidia gpu, delete the "`--gpus all \`" line
 ```
@@ -46,7 +46,7 @@ source devel/setup.bash
 8. Launch one of the [top level launchfiles](README.md#top-level-launch-files)!
 9. If the user wants to open more terminals inside the docker process, in a new terminal run:
 ```
-docker exec -it noah_docker_process bash
+./run_docker
 source /opt/ros/noetic/setup.bash
 source /home/catkin_ws/devel/setup.bash
 ```
