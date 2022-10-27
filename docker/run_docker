@@ -5,12 +5,19 @@ ABSDIR=$(dirname $(readlink -f $0))
 SCRIPTS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 REPO_DIR=`readlink -f ${SCRIPTS_DIR}/../`
 DOCKER_MOUNT_ARGS="-v ${REPO_DIR}/:/home/catkin_ws/src"
+NAME="docker_noahbot"
 
 xhost +local:root
-docker run -it -e DISPLAY -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-	${DOCKER_MOUNT_ARGS} \
-	-e "TERM=xterm-256color" \
-	--net=host \
-	--gpus all \
-    --name noah_docker_process \
-	--privileged --rm docker_noahbot /bin/bash
+
+# If the container is already running, just attach to it, else, create it.
+if [ ! "$(docker top ${NAME})" ]; then
+	docker run -it -e DISPLAY -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+		${DOCKER_MOUNT_ARGS} \
+		-e "TERM=xterm-256color" \
+		--net=host \
+		--gpus all \
+		--name ${NAME} \
+		--privileged --rm ${NAME} /bin/bash
+else
+	docker exec -it ${NAME} bash
+fi
