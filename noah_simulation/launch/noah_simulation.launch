@@ -3,7 +3,7 @@
     <!-- Testing world in gazebo (spawns robot) -->
     <arg name="gui" default="false" />
     <arg name="world_name" default="small_house" />
-    <include file="$(find noah_gazebo)/launch/noah_test_world.launch">
+    <include file="$(find noah_simulation)/launch/noah_test_world.launch">
         <arg name="gui" default="$(arg gui)" />
         <arg name="world_name" value="$(arg world_name)" />
     </include>
