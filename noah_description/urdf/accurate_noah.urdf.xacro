@@ -66,6 +66,11 @@
 			<odometryTopic>odom</odometryTopic>
 			<odometryFrame>odom</odometryFrame>
 			<robotBaseFrame>base_generic_link</robotBaseFrame>
+			<publishOdomTF>true</publishOdomTF>
+			<wheelAcceleration>0</wheelAcceleration>
+			<wheelTorque>5</wheelTorque>
+			<odometrySource>world</odometrySource>
+			<rosDebugLevel>1</rosDebugLevel>
 		</plugin>
 	</gazebo>
 
