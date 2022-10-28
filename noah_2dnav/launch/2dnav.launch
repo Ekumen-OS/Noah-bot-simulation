@@ -55,4 +55,7 @@
         <arg name="global_costmap" value="$(arg global_costmap)" />
    </include>
 
+   <!-- Move base sequence -->
+   <include file="$(find move_base_utils)/launch/move_base_sequence.launch" />
+
 </launch>

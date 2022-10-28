@@ -1,23 +1,8 @@
 <launch>
 
-  <arg name="robot_model" default="accurate_noah"/>
-  <arg name="rviz_config" default="accurate_noah"/>
-
-  <param name="robot_description"
-         command="$(find xacro)/xacro '$(find noah_description)/urdf/$(arg robot_model).urdf.xacro' " />
-
-  <!-- Joint state publishers. Dont need it because the diff_drive_plugin is in charge of publishing wheel joint state.
-  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" respawn="false">
-    <param name="publish_frequency" type="double" value="30.0" />
-  </node>-->
-
   <!-- RViz -->
-  <arg name="rviz" default="true"/>
-  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen"
-        args="-d $(find noah_rviz)/rviz/$(arg rviz_config).rviz" />
-
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="30.0" />
-  </node>
+  <arg name="rviz_config" default="noah_navigation" />
+  <node pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen"
+    args="-d $(find noah_rviz)/rviz/$(arg rviz_config).rviz" />
 
 </launch>

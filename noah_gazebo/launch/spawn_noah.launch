@@ -1,12 +1,11 @@
 <launch>
 
-	<arg name="robot_model" default="accurate_noah"/>
+    <arg name="robot_model" default="accurate_noah" />
 
-	<include file="$(find noah_description)/launch/description.launch">
-		<arg name="robot_model" value="$(arg robot_model)"/>
-	</include>
+    <!-- Robot description param -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find noah_description)/urdf/$(arg robot_model).urdf.xacro' " />
 
-	<!-- Spawn a robot into Gazebo-->
-	<node name="spawn_noah" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model $(arg robot_model)" /> 
+    <!-- Spawn Noah bot in the Gazebo world -->
+    <node name="spawn_noah" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model $(arg robot_model)" />
 
 </launch>

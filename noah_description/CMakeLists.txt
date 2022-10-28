@@ -8,8 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package()
 
-roslaunch_add_file_check(launch)
-
-install(DIRECTORY launch urdf meshes
+install(DIRECTORY urdf meshes
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
