@@ -9,4 +9,4 @@ Three configuration files are provided:
 - noah_navigation.rviz is used when launching the robot in navigation mode with a known map
 - noah_slam.rviz is used when launching the robot in SLAM mode.
 
-- The launch file loads the robot description in ROS param, opens RViz with the corresponding RViz configuration file and starts the robot_state_publisher node
+- The launch file opens RViz with the corresponding RViz configuration file

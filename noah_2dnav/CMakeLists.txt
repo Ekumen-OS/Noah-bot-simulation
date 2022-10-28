@@ -5,13 +5,13 @@ project(noah_2dnav)
 find_package(catkin REQUIRED COMPONENTS
   map_server
   amcl
-  move_base_utils
+  noah_control_utils
 )
 
 catkin_package()
 
 roslaunch_add_file_check(launch)
 
-install(DIRECTORY launch
+install(DIRECTORY launch configs
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 	noah_2dnav
 	noah_rtabmap
 	noah_rviz
-	move_base_utils
+	noah_control_utils
 	roslaunch
 )
 

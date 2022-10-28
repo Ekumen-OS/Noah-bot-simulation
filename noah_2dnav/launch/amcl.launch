@@ -1,0 +1,7 @@
+<launch>
+
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <rosparam file="$(find noah_2dnav)/configs/amcl_params.yaml" command="load" />
+    </node>
+
+</launch>

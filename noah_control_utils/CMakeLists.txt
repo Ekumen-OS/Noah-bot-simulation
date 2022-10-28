@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(move_base_utils)
+project(noah_control_utils)
 
 find_package(catkin REQUIRED COMPONENTS
   roslaunch
@@ -41,10 +41,11 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   nodes/wayposes_publisher.py
+  nodes/myrobot_key
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(DIRECTORY launch move_base_configs
+install(DIRECTORY launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

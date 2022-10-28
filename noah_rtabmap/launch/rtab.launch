@@ -1,44 +1,44 @@
 <launch>
 
-    <arg name="database_name" default="rtabmap" />
+  <arg name="database_name" default="rtabmap" />
 
-    <node pkg="nodelet" type="nodelet" name="rgbd_sync" args="standalone rtabmap_ros/rgbd_sync" output="screen">
-      <remap from="camera/rgb/image_rect_color"        to="/rgb/image"/>
-      <remap from="camera/depth_registered/image_raw"  to="/depth/image"/>
-      <remap from="camera/rgb/camera_info"             to="/rgb/camera_info"/>
-      <param name="approx_sync"       value="false"/>
-    </node>
+  <node pkg="nodelet" type="nodelet" name="rgbd_sync" args="standalone rtabmap_ros/rgbd_sync" output="screen">
+    <remap from="camera/rgb/image_rect_color" to="/rgb/image" />
+    <remap from="camera/depth_registered/image_raw" to="/depth/image" />
+    <remap from="camera/rgb/camera_info" to="/rgb/camera_info" />
+    <param name="approx_sync" value="false" />
+  </node>
 
-    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="--delete_db_on_start">
-          <param name="frame_id" type="string" value="base_generic_link"/>
-          <param name="database_path" value="~/.ros/$(arg database_name).db" />
+  <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="--delete_db_on_start">
+    <param name="frame_id" type="string" value="base_generic_link" />
+    <param name="database_path" value="~/.ros/$(arg database_name).db" />
 
-          <param name="subscribe_depth" type="bool" value="false"/>
-          <param name="subscribe_rgbd" type="bool" value="true"/>
-          <param name="subscribe_scan" type="bool" value="true"/>
+    <param name="subscribe_depth" type="bool" value="false" />
+    <param name="subscribe_rgbd" type="bool" value="true" />
+    <param name="subscribe_scan" type="bool" value="true" />
 
-          <remap from="base_controller/odom" to="/odom"/>
-          <remap from="base_scan" to="/scan"/>
-          <remap from="rgbd_image" to="rgbd_image"/>
+    <remap from="base_controller/odom" to="/odom" />
+    <remap from="base_scan" to="/scan" />
+    <remap from="rgbd_image" to="rgbd_image" />
 
-          <remap from="/get_map_data" to="/rtabmap/get_map_data"/>
+    <remap from="/get_map_data" to="/rtabmap/get_map_data" />
 
-          <param name="queue_size" type="int" value="10"/>
-          <param name="Mem/IncrementalMemory" type="string" value="true"/>
+    <param name="queue_size" type="int" value="10" />
+    <param name="Mem/IncrementalMemory" type="string" value="true" />
 
-          <!-- RTAB-Map's parameters -->
-          <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
-          <param name="RGBD/ProximityBySpace"     type="string" value="true"/>
-          <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
-          <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
-          <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
-          <param name="Grid/FromDepth"            type="string" value="false"/>
-          <param name="Reg/Force3DoF"             type="string" value="true"/>
-          <param name="Reg/Strategy"              type="string" value="1"/>
+    <!-- RTAB-Map's parameters -->
+    <param name="RGBD/NeighborLinkRefining" type="string" value="true" />
+    <param name="RGBD/ProximityBySpace" type="string" value="true" />
+    <param name="RGBD/AngularUpdate" type="string" value="0.01" />
+    <param name="RGBD/LinearUpdate" type="string" value="0.01" />
+    <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" />
+    <param name="Grid/FromDepth" type="string" value="false" />
+    <param name="Reg/Force3DoF" type="string" value="true" />
+    <param name="Reg/Strategy" type="string" value="1" />
 
-          <!-- ICP parameters -->
-          <param name="Icp/VoxelSize"                 type="string" value="0.05"/>
-          <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1"/>
-    </node>
+    <!-- ICP parameters -->
+    <param name="Icp/VoxelSize" type="string" value="0.05" />
+    <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1" />
+  </node>
 
 </launch>
