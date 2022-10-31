@@ -21,9 +21,6 @@
       <param name="initial_pose_x" value="9.89498"/>
       <param name="initial_pose_y" value="6.147881"/>
       <param name="initial_pose_a" value="0.0"/>
-      <!-- <param name="initial_cov_xx" value="0.0"/> -->
-      <!-- <param name="initial_cov_yy" value="0.0"/> -->
-      <!-- <param name="initial_cov_aa" value="0.0"/> -->
       <param name="gui_publish_rate" value="10.0"/>
       <param name="save_pose_rate" value="0.5"/>
       <param name="use_map_topic" value="false"/>
