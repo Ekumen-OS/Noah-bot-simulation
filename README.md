@@ -77,17 +77,17 @@ source devel/setup.bash
 
 - Launch SLAM node to map a world. Can move the robot with goals or with the keyboard control node:
     ```
-    $ roslaunch noah_simulation  noah_slam.launch database_name:=<DATABASE_NAME>
+    $ roslaunch noah_gazebo  noah_slam.launch database_name:=<DATABASE_NAME>
     ```
 
 - Launch navigation node. Includes wayposes publisher node:
     ```
-    $ roslaunch noah_simulation noah_simulation.launch map_name:=<MAP_NAME>
+    $ roslaunch noah_gazebo noah_gazebo.launch map_name:=<MAP_NAME>
     ```
 
 - Launch mapless navigation node:
     ```
-    $ roslaunch noah_simulation noah_simulation_mapless.launch
+    $ roslaunch noah_gazebo noah_gazebo.launch
     ```
 
 - Launch keyboard control (useful to move robot when generating the SLAM):
