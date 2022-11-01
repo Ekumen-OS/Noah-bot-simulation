@@ -1,22 +1,22 @@
 <launch>
 
-  <arg name="robot_model" default="accurate_noah"/>
-  <arg name="world_name" default="empty_world"/>
-  <arg name="gui" default="false" />
-
   <!-- Testing world in gazebo -->
+  <arg name="gui" default="false" />
+  <arg name="world_name" default="empty_world" />
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-  	<arg name="world_name" value="$(find noah_gazebo)/worlds/$(arg world_name).world"/>
-    <arg name="paused" value="false"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="gui" value="$(arg gui)"/>
-    <arg name="recording" value="false"/>
-    <arg name="debug" value="false"/>
-    <arg name="verbose" value="false"/>
+    <arg name="world_name" value="$(find noah_gazebo)/worlds/$(arg world_name).world" />
+    <arg name="paused" value="false" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="recording" value="false" />
+    <arg name="debug" value="false" />
+    <arg name="verbose" value="false" />
   </include>
 
-  <include file="$(find noah_gazebo)/launch/spawn_noah.launch" >
-    <arg name="robot_model" value="$(arg robot_model)"/>
+  <!-- Spawn Noah bot in the Gazebo world -->
+  <arg name="robot_model" default="accurate_noah" />
+  <include file="$(find noah_gazebo)/launch/spawn_noah.launch">
+    <arg name="robot_model" value="$(arg robot_model)" />
   </include>
 
 </launch>

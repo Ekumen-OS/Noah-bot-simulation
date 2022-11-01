@@ -82,12 +82,12 @@ source devel/setup.bash
 
 - Launch navigation node. Includes wayposes publisher node:
     ```
-    $ roslaunch noah_gazebo noah_navigation.launch map_name:=<MAP_NAME>
+    $ roslaunch noah_gazebo noah_gazebo.launch map_name:=<MAP_NAME>
     ```
 
 - Launch mapless navigation node:
     ```
-    $ roslaunch noah_gazebo noah_navigation_mapless.launch
+    $ roslaunch noah_gazebo noah_gazebo.launch
     ```
 
 - Launch keyboard control (useful to move robot when generating the SLAM):
@@ -109,4 +109,4 @@ The user can specify the name of the database to be saved by passing the "databa
 The user can specify the map in the navigation launch file by specifying the argument "map_name". Maps are located in the noah_2dnav package inside the maps folder. The default value is "rtabmap".
 
 ## Wayposes publisher
-A package was created to publish a set of goals for the move_base_sequence node. The goals are defined in a .yaml file located in move_base_utils/mb_goals folder.
+A package was created to publish a set of goals for the move_base_sequence node. The goals are defined in a .yaml file located in noah_control_utils/mb_goals folder.

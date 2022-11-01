@@ -1,0 +1,48 @@
+<launch>
+
+    <!-- Testing world in gazebo (spawns robot) -->
+    <arg name="gui" default="false" />
+    <arg name="world_name" default="small_house" />
+    <include file="$(find noah_gazebo)/launch/noah_test_world.launch">
+        <arg name="gui" default="$(arg gui)" />
+        <arg name="world_name" value="$(arg world_name)" />
+    </include>
+
+    <!-- Robot state publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+
+    <!-- Rviz -->
+    <arg name="rviz" default="true" />
+    <arg name="rviz_config" default="noah_navigation_mapless" />
+    <group if="$(eval arg('rviz') == true)">
+        <include file="$(find noah_rviz)/launch/view_noah.launch">
+            <arg name="rviz_config" value="$(arg rviz_config)" />
+        </include>
+    </group>
+
+    <!-- Navigation stack -->
+    <arg name="launch_navigation_stack" default="true" />
+    <arg name="global_costmap" default="global_costmap_mapless_params" />
+    <arg name="slam" default="false" />
+    <arg name="use_map" default="false" />
+    <arg name="map_name" default="rtabmap" />
+    <arg name="database_name" default="rtabmap" />
+    <group if="$(eval arg('launch_navigation_stack') == true)">
+        <include file="$(find noah_2dnav)/launch/2dnav.launch">
+            <arg name="global_costmap" value="$(arg global_costmap)" />
+            <arg name="slam" value="$(arg slam)" />
+            <arg name="use_map" value="$(arg use_map)" />
+            <arg name="map_name" value="$(arg map_name)" />
+            <arg name="database_name" value="$(arg database_name)" />
+        </include>
+    </group>
+
+    <!-- Wayposes publisher -->
+    <arg name="publish_test_goals" default="false" />
+    <group if="$(eval arg('publish_test_goals') == true)">
+        <include file="$(find noah_control_utils)/launch/wayposes_publisher.launch" />
+    </group>
+
+</launch>

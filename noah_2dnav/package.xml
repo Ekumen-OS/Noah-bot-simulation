@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>noah_2dnav</name>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <description>The noah_2dnav package</description>
 
   <author email="juancarosella96@ekumenlabs.com">JuanCarosella</author>
@@ -12,7 +12,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>amcl</depend>
   <depend>map_server</depend>
-  <depend>move_base_utils</depend>
+  <depend>noah_control_utils</depend>
 
   <export>
 

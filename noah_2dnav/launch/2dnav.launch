@@ -1,58 +1,45 @@
 <launch>
 
-   <arg name="map_name" default="rtabmap"/>
-   <arg name="global_costmap" default="global_costmap_params"/>
+   <arg name="global_costmap" default="global_costmap_mapless_params" />
+   <arg name="slam" default="false" />
+   <arg name="use_map" default="false" />
+   <arg name="map_name" default="rtabmap" />
+   <arg name="database_name" default="rtabmap" />
 
-   <!-- Run the map server -->
-   <node name="map_server" pkg="map_server" type="map_server" args="$(find noah_2dnav)/maps/$(arg map_name).pgm 0.05"/>
+   <group if="$(eval arg('slam') == false)">
+      <!-- Launch mapless navigation by default-->
+      <group if="$(eval arg('use_map') == false)">
+         <!-- move_base -->
+         <include file="$(find noah_2dnav)/launch/move_base.launch">
+            <arg name="global_costmap" value="global_costmap_mapless_params" />
+         </include>
+      </group>
+      <!-- Launch navigation with map, if slam if false-->
+      <group if="$(eval arg('use_map') == true)">
+         <!-- Run the map server -->
+         <node name="map_server" pkg="map_server" type="map_server" args="$(find noah_2dnav)/maps/$(arg map_name).pgm 0.05" />
+         <!-- AMCL -->
+         <include file="$(find noah_2dnav)/launch/amcl.launch" />
+         <!-- Move_base -->
+         <include file="$(find noah_2dnav)/launch/move_base.launch">
+            <arg name="global_costmap" value="global_costmap_map_params" />
+         </include>
+      </group>
+   </group>
 
-   <!--- Run AMCL -->
-   <node pkg="amcl" type="amcl" name="amcl" output="screen">
-      <param name="min_particles" value="100"/>
-      <param name="max_particles" value="5000"/>
-      <param name="kld_err" value="0.01"/>
-      <param name="kld_z" value="0.99"/>
-      <param name="update_min_d" value="0.05"/>
-      <param name="update_min_a" value="0.05"/>
-      <param name="resample_interval" value="1"/>
-      <param name="transform_tolerance" value="0.1"/>
-      <param name="recovery_alpha_slow" value="0.0"/>
-      <param name="recovery_alpha_fast" value="0.0"/>
-      <param name="initial_pose_x" value="9.89498"/>
-      <param name="initial_pose_y" value="6.147881"/>
-      <param name="initial_pose_a" value="0.0"/>
-      <param name="gui_publish_rate" value="10.0"/>
-      <param name="save_pose_rate" value="0.5"/>
-      <param name="use_map_topic" value="false"/>
-      <param name="first_map_only" value="false"/>
-      <param name="selective_resampling" value="false"/>
-      <param name="laser_min_range" value="-1.0"/>
-      <param name="laser_max_range" value="-1.0"/>
-      <param name="laser_max_beams" value="100"/>
-      <param name="laser_z_hit" value="0.95"/>
-      <param name="laser_z_short" value="0.1"/>
-      <param name="laser_z_max" value="0.05"/>
-      <param name="laser_z_rand" value="0.5"/>
-      <param name="laser_sigma_hit" value="0.2"/>
-      <param name="laser_lambda_short" value="0.1"/>
-      <param name="laser_likelihood_max_dist" value="2.0"/>
-      <param name="laser_model_type" value="likelihood_field"/>
-      <param name="odom_model_type" value="diff-corrected"/>
-      <param name="odom_alpha1" value="0.002"/>
-      <param name="odom_alpha2" value="0.002"/>
-      <param name="odom_alpha3" value="0.002"/>
-      <param name="odom_alpha4" value="0.002"/>
-      <param name="odom_alpha5" value="0.002"/>
-      <param name="odom_frame_id" value="odom"/>
-      <param name="base_frame_id" value="base_generic_link"/>
-      <param name="global_frame_id" value="map"/>
-      <param name="tf_broadcast" value="true"/>
-   </node>
+   <!-- Launch SLAM-->
+   <group if="$(eval arg('slam') == true)">
+      <!-- RTAB -->
+      <include file="$(find noah_rtabmap)/launch/rtab.launch">
+         <arg name="database_name" value="$(arg database_name)" />
+      </include>
+      <!-- Move_base -->
+      <include file="$(find noah_2dnav)/launch/move_base.launch">
+         <arg name="global_costmap" value="global_costmap_mapless_params" />
+      </include>
+   </group>
 
-
-   <!-- Move base -->
-   <include file="$(find move_base_utils)/launch/move_base.launch" >
-        <arg name="global_costmap" value="$(arg global_costmap)" />
-   </include>
+   <!-- Move base sequence -->
+   <include file="$(find noah_control_utils)/launch/move_base_sequence.launch" />
 
 </launch>

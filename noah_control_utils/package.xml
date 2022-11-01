@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>move_base_utils</name>
-  <version>0.1.0</version>
-  <description>The move_base_utils package</description>
+  <name>noah_control_utils</name>
+  <version>0.2.0</version>
+  <description>The noah_control_utils package</description>
 
   <author email="juancarosella96@ekumenlabs.com">JuanCarosella</author>
   <maintainer email="juancarosella96@ekumenlabs.com">JuanCarosella</maintainer>

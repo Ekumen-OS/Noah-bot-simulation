@@ -1,0 +1,16 @@
+<launch>
+
+   <arg name="global_costmap" default="global_costmap_mapless_params" />
+
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <rosparam file="$(find noah_2dnav)/configs/costmap_common_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find noah_2dnav)/configs/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find noah_2dnav)/configs/local_costmap_params.yaml" command="load" />
+      <rosparam file="$(find noah_2dnav)/configs/$(arg global_costmap).yaml" command="load" />
+      <rosparam file="$(find noah_2dnav)/configs/move_base_params.yaml" command="load" />
+
+      <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+      <rosparam file="$(find noah_2dnav)/configs/base_local_planner_params.yaml" command="load" />
+   </node>
+
+</launch>
