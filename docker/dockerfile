@@ -1,5 +1,24 @@
 FROM osrf/ros:noetic-desktop-full
 
-RUN apt-get update
+
+RUN apt-get update && apt-get dist-upgrade --yes
+
+RUN mkdir -p /home/catkin_ws/src
+
+WORKDIR /home/catkin_ws/src
+
+COPY move_base_utils move_base_utils
+COPY noah_2dnav noah_2dnav
+COPY noah_control noah_control
+COPY noah_description noah_description
+COPY noah_gazebo noah_gazebo
+COPY noah_rtabmap noah_rtabmap
+COPY noah_rviz noah_rviz
+
+WORKDIR /home/catkin_ws
+
+RUN rosdep install --from-paths src --ignore-src -r -y
+
+RUN . /opt/ros/noetic/setup.sh && catkin_make
 
 CMD ["/bin/echo", ""]
