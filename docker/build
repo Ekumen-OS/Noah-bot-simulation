@@ -1,2 +1,1 @@
-ABSDIR=$(dirname $(readlink -f $0))
-docker build -t docker_noahbot $ABSDIR
+(cd .. && docker build -t docker_noahbot -f docker/dockerfile .)
